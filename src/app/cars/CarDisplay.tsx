@@ -1,6 +1,6 @@
 "use client"
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import SearchIcon from '@/assets/SearchIcon.svg';
 
 import Image from 'next/image';
@@ -29,7 +29,6 @@ const CarDisplay: React.FC<CarDisplayProps> = (props) => {
 	const [cars, setCars] = React.useState<DBCar[]>(props.cars);
 	const [formState, setFormState] = React.useState<FormState>("close");
 	const [selectedCar, setSelectedCar] = React.useState<DBCar>(baseSelectedCar);
-
 	const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => { setSearchTerm(e.target.value) }
 
 	const shouldDisplayCar = (car: DBCar): boolean => {
@@ -146,6 +145,7 @@ const CarDisplay: React.FC<CarDisplayProps> = (props) => {
 		<CarForm 
 			action={addCar}
 			isOpen={formState === "add"}
+			title="Add a Car"
 			close={() => {
 				setFormState("close");
 				setSelectedCar(baseSelectedCar)
@@ -156,6 +156,7 @@ const CarDisplay: React.FC<CarDisplayProps> = (props) => {
 			action={(car: Car) => updateCar(selectedCar.id, car)}
 			isOpen={formState === "edit"}
 			close={() => setFormState("close")}
+			title="Edit a Car"
 			car={selectedCar.car}
 		/>
 

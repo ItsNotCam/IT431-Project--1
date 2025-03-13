@@ -17,13 +17,15 @@ interface CarFormProps {
 	action: (car: Car) => Promise<boolean>;
 	isOpen: boolean;
 	close: () => void;
+	title: string;
 	car?: Car;
 }
 
 const CarForm: React.FC<CarFormProps> = (props) => {
 	const imageFileRef = React.useRef<HTMLInputElement>(null);
 	const formRef = React.useRef<HTMLFormElement>(null);
-
+	
+	const [title, setTitle] = React.useState<string>(props.title);
 	const [car, setCar] = React.useState<Car>({
 		...baseCar,
 		...props.car
@@ -35,6 +37,8 @@ const CarForm: React.FC<CarFormProps> = (props) => {
 			formRef.current?.reset();
 		}
 	},[props.isOpen])
+
+	useEffect(() => setTitle(props.title), [props.title]);
 
 	const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = event.target;
@@ -84,7 +88,7 @@ const CarForm: React.FC<CarFormProps> = (props) => {
 				transition-transform duration-[350ms]"
 				data-visible={props.isOpen}
 			>
-				<h1 className='text-xl mt-2'>Add a Car</h1>
+				<h1 className='text-xl mt-2'>{title}</h1>
 
 				<form onSubmit={handleSubmit} ref={formRef}>
 					<div className='flex flex-col gap-4'>
