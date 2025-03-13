@@ -1,5 +1,4 @@
-import CarDisplay from "@/layouts/CarDisplay";
-import Nav from "@/components/Nav";
+import CarDisplay from "./CarDisplay";
 import { getCars } from "@/lib/db";
 
 export default async function Home() {
