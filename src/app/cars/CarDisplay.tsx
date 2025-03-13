@@ -156,7 +156,7 @@ const CarDisplay: React.FC<CarDisplayProps> = (props) => {
 			action={(car: Car) => updateCar(selectedCar.id, car)}
 			isOpen={formState === "edit"}
 			close={() => setFormState("close")}
-			title="Edit a Car"
+			title={`Edit '${selectedCar.car.make} ${selectedCar.car.model}'`}
 			car={selectedCar.car}
 		/>
 
